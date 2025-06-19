@@ -1,8 +1,9 @@
-import React from 'react'
-
+import ClientAuthGuard from "@/components/auth-provider/ClientAuthGuard"
 const MyListPpage = () => {
   return (
-    <div>MyListPpage</div>
+    <ClientAuthGuard>
+      <div>MyList Page</div>
+    </ClientAuthGuard>
   )
 }
 

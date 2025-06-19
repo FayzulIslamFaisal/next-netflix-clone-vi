@@ -1,7 +1,9 @@
-
+import ClientAuthGuard from "@/components/auth-provider/ClientAuthGuard"
 const SearchPpage = () => {
   return (
-    <div>Search Ppage</div>
+    <ClientAuthGuard>
+      <div>Search Page</div>
+    </ClientAuthGuard>
   )
 }
 

@@ -1,8 +1,9 @@
-import React from 'react'
-
+import ClientAuthGuard from "@/components/auth-provider/ClientAuthGuard"
 const TvPage = () => {
   return (
-    <div>Tv Page</div>
+    <ClientAuthGuard>
+      <div>Tv Page</div>
+    </ClientAuthGuard>
   )
 }
 

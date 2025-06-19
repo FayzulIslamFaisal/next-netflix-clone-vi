@@ -1,7 +1,10 @@
-
+import ServerAuthGuard from "@/components/auth-provider/ServerAuthGuard"
 const MoviesPpage = () => {
   return (
-    <div>MoviesPpage</div>
+   <ServerAuthGuard>
+      <div>Movies Page</div>
+    </ServerAuthGuard>
+    
   )
 }
 
