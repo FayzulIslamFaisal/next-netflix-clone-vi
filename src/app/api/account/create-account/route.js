@@ -58,7 +58,7 @@ export async function POST(req) {
     return NextResponse.json({
       success: true,
       message: "New Account Created Successfully!",
-      data: newAccount,
+      result: newAccount,
     });
 
   } catch (error) {

@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 export async function DELETE(req, { params }) {
   try {
    const { id } = params;
+
     if (!id) {
       return NextResponse.json(
         {
@@ -15,7 +16,7 @@ export async function DELETE(req, { params }) {
     }
 
     // Check if the account exists
-    const existingAccount = await prisma.account.findUnique({
+    const existingAccount = await prisma.account.findFirst({
       where: { id },
     });
     console.log("existingAccount", existingAccount);

@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import BrowsePage from "./browse/page";
 import ClientAuthGuard from "@/components/auth-provider/ClientAuthGuard";
 

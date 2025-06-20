@@ -1,11 +1,19 @@
-import ServerAuthGuard from "@/components/auth-provider/ServerAuthGuard"
-const MoviesPpage = () => {
-  return (
-   <ServerAuthGuard>
-      <div>Movies Page</div>
-    </ServerAuthGuard>
-    
-  )
-}
+"use client";
+import ClientAuthGuard from "@/components/auth-provider/ClientAuthGuard";
+import { useContext } from "react";
+import { GlobalContext } from "../context";
+import ManageAccount from "@/components/manage-account";
 
-export default MoviesPpage
+const MoviesPpage = () => {
+  const { loggedInAccount } = useContext(GlobalContext);
+  if (loggedInAccount === null) {
+    return <ManageAccount />;
+  }
+  return (
+    <ClientAuthGuard>
+      <div>Movies Page</div>
+    </ClientAuthGuard>
+  );
+};
+
+export default MoviesPpage;

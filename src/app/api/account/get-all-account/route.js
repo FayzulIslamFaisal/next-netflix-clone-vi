@@ -44,8 +44,8 @@ export async function GET(req) {
     // ✅ Success response
     return NextResponse.json({
       success: true,
-      message: "Fetched account(s).",
-      data: accounts,
+      message: "Fetche All account(s) Data.",
+      results: accounts,
     });
   } catch (error) {
     console.error("GET /api/account error:", error);
