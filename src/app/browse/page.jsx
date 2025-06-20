@@ -11,6 +11,9 @@ const BrowsePage = () => {
     return <ManageAccount />;
   }
 
+  console.log("Home Page loggedInAccount", loggedInAccount);
+  
+
   return (
     <ClientAuthGuard>
       <div className=" flex gap-2 items-center">Browse Page </div>

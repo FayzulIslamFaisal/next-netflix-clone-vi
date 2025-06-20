@@ -9,11 +9,9 @@ const PinContainer = ({
   return (
     <div className="text-center space-y-4">
       <h2 className="text-2xl font-bold text-black">Profile Locked 🔒</h2>
-      {pinError ? (
-        <p className="text-red-600 font-medium">Whoops! Wrong PIN, please try again.</p>
-      ) : (
-        <p className="text-gray-700">Enter your 4-digit PIN to access this profile.</p>
-      )}
+      {pinError && (
+        <p className="text-red-600 font-medium">Whoops! Wrong PIN, Enter your 4-digit PIN to access this profile.</p>
+      ) }
 
       <OtpInput
         value={pin}
