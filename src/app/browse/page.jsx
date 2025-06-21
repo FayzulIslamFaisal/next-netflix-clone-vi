@@ -4,6 +4,7 @@ import ClientAuthGuard from "@/components/auth-provider/ClientAuthGuard";
 import { useContext } from "react";
 import { GlobalContext } from "../context";
 import ManageAccount from "@/components/manage-account";
+import CommonLayout from "@/components/common-layout";
 
 const BrowsePage = () => {
   const { loggedInAccount } = useContext(GlobalContext);
@@ -16,7 +17,9 @@ const BrowsePage = () => {
 
   return (
     <ClientAuthGuard>
-      <div className=" flex gap-2 items-center">Browse Page </div>
+      <main>
+        <CommonLayout/>
+      </main>
     </ClientAuthGuard>
   );
 };
