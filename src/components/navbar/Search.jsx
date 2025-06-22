@@ -32,14 +32,14 @@ const Search = ({
         className="bg-transparent text-sm text-white font-medium h-[34px] px-2 py-2 placeholder:text-white outline-none"
       />
       <button
-        className="text-white ml-2 hover:text-red-500"
+        className="text-white ml-2 hover:text-yellow-500"
         onClick={handleSearch}
         title="Search"
       >
         <AiOutlineSearch size={20} />
       </button>
       <button
-        className="text-white ml-2 hover:text-red-500"
+        className="text-white ml-2 hover:text-yellow-500"
         onClick={() => setShowSearchBar(false)}
         title="Close"
       >
