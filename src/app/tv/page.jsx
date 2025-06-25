@@ -8,9 +8,12 @@ const TvPage = () => {
   if (loggedInAccount === null) {
     return <ManageAccount />;
   }
+  
   return (
     <ClientAuthGuard>
-      <div>Tv Page</div>
+      <main className="bg-black text-white min-h-screen">
+        <CommonLayout mediaData={mediaData} />
+      </main>
     </ClientAuthGuard>
   )
 }

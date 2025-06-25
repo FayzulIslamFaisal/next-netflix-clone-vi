@@ -72,7 +72,7 @@ const BrowsePage = () => {
 
   return (
     <ClientAuthGuard>
-      <main>
+      <main className="bg-black text-white min-h-screen">
         <CommonLayout mediaData={mediaData} />
       </main>
     </ClientAuthGuard>

@@ -41,7 +41,7 @@ const Navbar = () => {
     <>
     <nav
       className={`fixed top-0 w-full z-50 transition-colors duration-300 ${
-        isScrolled ? "bg-black shadow-md" : "bg-transparent"
+        isScrolled ? "bg-black shadow-md" : "bg-gray-500"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center gap-4">
@@ -56,6 +56,11 @@ const Navbar = () => {
             <li key={item.id}>
               <Link
                 href={item.path}
+                onClick={() => {
+                 setSearchQuery("");
+                 setShowSearchBar(false);
+                }}
+
                 className={`text-sm font-medium border rounded px-4 py-2 transition bg-amber-500 hover:text-black ${
                   pathname === item.path ? "text-black" : "text-white"
                 }`}
