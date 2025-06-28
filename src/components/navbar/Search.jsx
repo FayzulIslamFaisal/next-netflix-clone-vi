@@ -9,11 +9,13 @@ const Search = ({
   searchQuery,
   router,
   pathname,
+  onKeyUp, // Add this prop
 }) => {
   const handleSearch = () => {
     if (searchQuery.trim().length >= 1) {
-      router.push(`/search?query=${encodeURIComponent(searchQuery.trim())}`);
+      router.push(`/search/${encodeURIComponent(searchQuery.trim())}`);
       setShowSearchBar(false);
+      setSearchQuery(""); // Clear the search query
     }
   };
 
@@ -30,6 +32,7 @@ const Search = ({
         onKeyDown={handleKeyDown}
         placeholder="Search Movies, TV and Dramas"
         className="bg-transparent text-sm text-white font-medium h-[34px] px-2 py-2 placeholder:text-white outline-none"
+        autoFocus
       />
       <button
         className="text-white ml-2 hover:text-yellow-500"
