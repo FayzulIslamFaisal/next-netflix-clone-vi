@@ -6,10 +6,12 @@ import Banner from "./Banner";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { FaCheck, FaChevronDown, FaPlus } from "react-icons/fa6";
 import { IoMdInformationCircle } from "react-icons/io";
+import { useRouter } from "next/navigation";
 
 const CommonLayout = ({mediaData}) => {
   // console.log("BrowsePage mediaData", mediaData);
   const baseImageUrl = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
+  const router = useRouter();
   return (
     <>
     <Navbar/>
@@ -23,7 +25,8 @@ const CommonLayout = ({mediaData}) => {
             {item.medias.map((media, mediaIndex) => (
               <div
                 key={mediaIndex}
-                className="bg-gray-200/10 p-2 rounded-lg relative transition-all duration-500 ease-in-out hover:shadow-2xl hover:scale-[1.02]"
+                onClick={() => router.push(`/watch/${media.mediaType}/${media.id}`)}
+                className="bg-gray-200/10 cursor-pointer p-2 rounded-lg relative transition-all duration-500 ease-in-out hover:shadow-2xl hover:scale-[1.02]"
               >
                 <div className="w-full h-[200px] relative group overflow-hidden rounded-lg">
                   {/* Image */}
@@ -31,7 +34,7 @@ const CommonLayout = ({mediaData}) => {
                     src={`${baseImageUrl}${media?.backdrop_path ? media.backdrop_path : media?.poster_path}`}
                     alt={media.name || media.title}
                     fill
-                    className="object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
+                    className="cursor-pointer object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
                   />
 
                   {/* Overlay: Centered Title + Button */}
