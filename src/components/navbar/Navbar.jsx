@@ -26,7 +26,7 @@ const Navbar = () => {
     { id: 2, title: "Movies", path: "/movies" },
     { id: 5, title: "TV", path: "/tv" },
     { id: 3, title: "MyList", path: "/my-list" },
-    { id: 4, title: "Search", path: "/search" },
+    // { id: 4, title: "Search", path: "/search" },
     
   ];
 
@@ -41,7 +41,7 @@ const Navbar = () => {
   return (
     <>
     <nav
-      className={`fixed top-0 w-full z-50 transition-colors duration-300 ${
+      className={`fixed top-0 w-full z-50 transition-colors duration-300 shadow shadow-gray-50 ${
         isScrolled ? "bg-black shadow-md" : "bg-black/25"
       }`}
     >

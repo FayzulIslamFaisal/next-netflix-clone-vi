@@ -100,14 +100,16 @@ export const getTvOrMovieVideoById = async (mediaType, id) => {
 export const getTvOrMovieSearchs = async (mediaType, query) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/search/${mediaType}/?api_key=${process.env.NEXT_PUBLIC_API_KEY}&include_adult=false&language=en-US&query=${query}`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/search/${mediaType}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&include_adult=false&language=en-US&query=${encodeURIComponent(query)}`
     );
+    if (!response.ok) {
+      throw new Error("API error");
+    }
     const data = await response.json();
-    console.log("data",data.results);
-    
     return data;
   } catch (error) {
-    console.error("Error fetching trending media:", error);
-    return null; 
+    console.error("Error fetching media:", error);
+    return { results: [] }; // return safe fallback
   }
 };
+
