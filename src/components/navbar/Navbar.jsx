@@ -24,9 +24,10 @@ const Navbar = () => {
   const menuItems = [
     { id: 1, title: "Home", path: "/browse" },
     { id: 2, title: "Movies", path: "/movies" },
+    { id: 5, title: "TV", path: "/tv" },
     { id: 3, title: "MyList", path: "/my-list" },
     { id: 4, title: "Search", path: "/search" },
-    { id: 5, title: "TV", path: "/tv" },
+    
   ];
 
   useEffect(() => {
@@ -41,7 +42,7 @@ const Navbar = () => {
     <>
     <nav
       className={`fixed top-0 w-full z-50 transition-colors duration-300 ${
-        isScrolled ? "bg-black shadow-md" : "bg-gray-500"
+        isScrolled ? "bg-black shadow-md" : "bg-black/25"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center gap-4">
@@ -61,8 +62,8 @@ const Navbar = () => {
                  setShowSearchBar(false);
                 }}
 
-                className={`text-sm font-medium border rounded px-4 py-2 transition bg-amber-500 hover:text-black ${
-                  pathname === item.path ? "text-black" : "text-white"
+                className={`text-sm font-medium border rounded px-4 py-2 transition bg-transparent hover:text-yellow-500 ${
+                  pathname === item.path ? "text-yellow-500" : "text-white"
                 }`}
               >
                 {item.title}
