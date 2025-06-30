@@ -8,12 +8,19 @@ import { getTvOrMovieSearchs } from "@/utils";
 import Navbar from "@/components/navbar/Navbar";
 import { FaCheck, FaChevronDown, FaPlus } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
+import DetailsModal from "@/components/DetailsModal";
 
 const SearchPage = ({ params }) => {
   const unwrappedParams = use(params); // ✅ unwrap the Promise
   const { query } = unwrappedParams || {};
 
-  const { loggedInAccount, searchResults, setSearchResults } = useContext(GlobalContext);
+  const { 
+          loggedInAccount, 
+          searchResults, 
+          setSearchResults, 
+          currentMediaInfoIdAndType, 
+          setCurrentMediaInfoIdAndType
+       } = useContext(GlobalContext);
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState(null);
 
@@ -36,8 +43,8 @@ const SearchPage = ({ params }) => {
             
 
             setSearchResults({
-              tvShows: tvData?.results || [],
-              movies: movieData?.results || [],
+              tvShows: tvData?.results.map((item) => ({ ...item, mediaType: "tv" })),
+              movies: movieData?.results.map((item) => ({ ...item, mediaType: "movie" })),
             });
           })();
         });
@@ -54,6 +61,7 @@ const SearchPage = ({ params }) => {
 
   return (
     <ClientAuthGuard>
+      <>
       <div className="bg-black min-h-screen pt-[100px]">
       <Navbar/>
       <div className="container mx-auto px-4 py-8">
@@ -86,7 +94,7 @@ const SearchPage = ({ params }) => {
                             : "/Logo.jpg"
                         }
                         alt={item.original_title || item.title}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover cursor-pointer"
                       />
                       <div className="p-2 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-sm font-medium text-center truncate">
                         <p>
@@ -101,7 +109,12 @@ const SearchPage = ({ params }) => {
                                 <FaPlus className="w-5 h-5 text-white" />
                               )}
                           </button>
-                          <button className="bg-black/40 text-white border p-2 rounded-full hover:bg-gray-700 transition-colors duration-300 cursor-pointer">
+                          <button
+                             onClick={(e) => {
+                              e.stopPropagation(); 
+                              setCurrentMediaInfoIdAndType({ id: item.id, mediaType: item.mediaType });
+                            }}
+                           className="bg-black/40 text-white border p-2 rounded-full hover:bg-gray-700 transition-colors duration-300 cursor-pointer">
                             <FaChevronDown className="w-5 h-5 text-white"/>
                           </button>
                         </div>
@@ -132,7 +145,7 @@ const SearchPage = ({ params }) => {
                               : "/Logo.jpg"
                           }
                         alt={item.name}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover cursor-pointer"
                       />
                       <div className="p-2 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-sm font-medium text-center truncate">
                         <p>
@@ -146,7 +159,12 @@ const SearchPage = ({ params }) => {
                                 <FaPlus className="w-5 h-5 text-white" />
                               )}
                           </button>
-                          <button className="bg-black/40 cursor-pointer text-white border p-2 rounded-full hover:bg-gray-700 transition-colors duration-300">
+                          <button 
+                            onClick={(e) => {
+                              e.stopPropagation(); 
+                              setCurrentMediaInfoIdAndType({ id: item.id, mediaType: item.mediaType });
+                            }}
+                            className="bg-black/40 cursor-pointer text-white border p-2 rounded-full hover:bg-gray-700 transition-colors duration-300">
                             <FaChevronDown className="w-5 h-5 text-white"/>
                           </button>
                         </div>
@@ -169,6 +187,16 @@ const SearchPage = ({ params }) => {
         )}
       </div>
       </div>
+      {
+        currentMediaInfoIdAndType && (
+          <DetailsModal
+            id={currentMediaInfoIdAndType.id}
+            mediaType={currentMediaInfoIdAndType.mediaType}
+            onClose={() => setCurrentMediaInfoIdAndType(null)}
+          />
+        )
+      }
+      </>
     </ClientAuthGuard>
   );
 };

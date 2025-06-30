@@ -9,12 +9,14 @@ export const GlobalState = ({ children }) => {
   const [accounts, setAccounts] = useState([]);
   const [mediaData, setMediaData] = useState([]);
   const [searchResults, setSearchResults ] = useState([]);
+  const [currentMediaInfoIdAndType, setCurrentMediaInfoIdAndType ] = useState(null);
+
   useEffect(()=>{
     setLoggedInAccount(JSON.parse(sessionStorage.getItem("loggedInAccount")))
   },[])
   return (
     <GlobalContext.Provider
-      value={{ loggedInAccount, setLoggedInAccount, accounts, setAccounts, mediaData, setMediaData, searchResults, setSearchResults }}
+      value={{ loggedInAccount, setLoggedInAccount, accounts, setAccounts, mediaData, setMediaData, searchResults, setSearchResults ,currentMediaInfoIdAndType, setCurrentMediaInfoIdAndType }}
     >
       {children}
     </GlobalContext.Provider>

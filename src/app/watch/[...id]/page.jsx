@@ -85,12 +85,12 @@ const WatchPage = ({ params }) => {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white p-6 space-y-4">
+    <div className="h-[calc(100vh-0px)] bg-black text-white p-6 space-y-4">
       {/* <h1 className="text-3xl font-bold">{mediaDetails.title}</h1>
       <p className="text-gray-300">{mediaDetails.overview}</p> */}
 
       {trailerKey ? (
-        <div className="relative pt-[56.25%]"> {/* 16:9 Aspect Ratio */}
+        <div className="relative pt-[50.25%]"> {/* 16:9 Aspect Ratio */}
           <ReactPlayer
             url={`https://www.youtube.com/watch?v=${trailerKey}`}
             width="100%"
