@@ -175,7 +175,7 @@ const ManageAccount = () => {
         <div className="flex flex-col items-center gap-6">
           <h1 className="text-4xl font-bold text-center">Who's Watching? 🎥</h1>
 
-          <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 mt-4">
+          <ul className={`${accounts?.length == 0 ?"grid-rows-1":"grid-cols-2 sm:grid-cols-3 md:grid-cols-4"}grid  gap-6 mt-4`}>
             {isPending ? (
               <li className="col-span-full flex items-center justify-center w-full h-40">
                 <div className="text-white text-xl font-semibold text-center animate-pulse">
@@ -222,13 +222,13 @@ const ManageAccount = () => {
                 </li>
               ))
             ) : (
-              <li>
-                <p className="text-white">No accounts found</p>
+              <li className="col-span-full flex justify-center items-center">
+                <p className="text-white text-2xl pb-3">No accounts found</p>
               </li>
             )}
 
             {!isPending && accounts?.length < 4 && (
-              <li>
+              <li className="col-span-full flex justify-center items-center">
                 <button
                   onClick={() => setShowAccountForm(true)}
                   type="button"
@@ -242,6 +242,74 @@ const ManageAccount = () => {
               </li>
             )}
           </ul>
+          {/* <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 mt-4">
+            {isPending ? (
+              <li className="col-span-full flex items-center justify-center w-full h-40">
+                <div className="text-white text-xl font-semibold text-center animate-pulse">
+                  Loading...
+                </div>
+              </li>
+            ) : accounts?.length > 0 ? (
+              accounts.map((acc) => (
+                <li
+                  key={acc.id}
+                  className="group flex flex-col items-center transition hover:scale-105"
+                >
+                  <button
+                    onClick={() => {
+                      if (!showDeleteIcon) {
+                        setSelectedAccount(acc);
+                        setShowPinContainer(true);
+                      }
+                    }}
+                    className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-2 border-transparent group-hover:border-red-600 shadow relative"
+                  >
+                    <Image
+                      src={userAvatar || "/default-avatar.png"}
+                      alt={acc.name || "Profile"}
+                      width={112}
+                      height={112}
+                      className="object-cover w-full h-full"
+                    />
+                    {showDeleteIcon && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          e.preventDefault();
+                          handleDeleteAccount(acc.id);
+                        }}
+                        className="absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 bg-red-600 text-white p-2 rounded-full hover:bg-red-700 shadow z-10 cursor-pointer"
+                        title="Delete Account"
+                      >
+                        <FaTrashCan size={16} />
+                      </button>
+                    )}
+                  </button>
+                  <span className="mt-2 text-lg">{acc.name || "Unnamed"}</span>
+                </li>
+              ))
+            ) : (
+              <li className="col-span-full flex justify-center items-center h-40">
+                <p className="text-white text-xl font-semibold">No accounts found</p>
+              </li>
+            )}
+
+            {!isPending && accounts?.length < 4 && (
+              <li className="flex justify-center items-center ">
+                <button
+                  onClick={() => setShowAccountForm(true)}
+                  type="button"
+                  className="group flex flex-col items-center transition hover:scale-105 cursor-pointer"
+                >
+                  <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gray-800 flex items-center justify-center text-4xl border-2 border-dashed border-gray-400 group-hover:border-red-600">
+                    +
+                  </div>
+                  <span className="mt-2 text-lg">Add Profile</span>
+                </button>
+              </li>
+            )}
+          </ul> */}
+
 
           <div className="text-center mt-4">
             <span
