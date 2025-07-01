@@ -11,7 +11,7 @@ const UnauthPage = () => {
         <h1 className="text-3xl font-bold mb-6">Sign In to Netflix</h1>
         <button
           onClick={() => signIn("github")}
-          className="flex items-center justify-center gap-2 bg-white text-black px-4 py-2 w-full rounded hover:bg-gray-300 transition"
+          className="cursor-pointer flex items-center justify-center gap-2 bg-white text-black px-4 py-2 w-full rounded hover:bg-gray-300 transition"
         >
           <FaGithub size={20} />
           Sign in with GitHub
