@@ -19,7 +19,7 @@ const SearchPage = ({ params }) => {
           searchResults, 
           setSearchResults, 
           currentMediaInfoIdAndType, 
-          setCurrentMediaInfoIdAndType
+          setCurrentMediaInfoIdAndType,
        } = useContext(GlobalContext);
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState(null);

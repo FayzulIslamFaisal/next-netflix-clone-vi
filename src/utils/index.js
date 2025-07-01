@@ -135,10 +135,10 @@ export const getSimilerTvOrMovies = async (mediaType, id) => {
       `${process.env.NEXT_PUBLIC_BASE_URL}/${mediaType}/${id}similar?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US`
     );
     const data = await response.json();
-    return data && data.results;
+    return data?.results || [];
   } catch (error) {
     console.error("Error fetching trending media:", error);
-    return null; // fallback value or handle as needed
+    return null; 
   }
 };
 

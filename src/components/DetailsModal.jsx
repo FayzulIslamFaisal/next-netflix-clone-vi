@@ -1,21 +1,71 @@
 "use client";
 
-import { useEffect } from "react";
+import { GlobalContext } from "@/app/context";
+import { getSimilerTvOrMovies, getTvOrMovieDetailsById } from "@/utils";
+import { useContext, useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 
 const DetailsModal = ({ id, mediaType, onClose }) => {
-  // Optional: Close modal on ESC
-    useEffect(() => {
-        const handleKeyDown = (e) => {
-            if (e.key === "Escape" || e.key === "Enter") {
-            e.preventDefault();
-            onClose();
-            }
-        };
+  const {
+    mediaDetails,
+    setMediaDetails,
+    similarMovies,
+    setSimilarMovies,
+    currentMediaInfoIdAndType,
+    setCurrentMediaInfoIdAndType,
+    loggedInAccount,
+  } = useContext(GlobalContext);
 
-        window.addEventListener("keydown", handleKeyDown);
-        return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [onClose]);
+  const [key, setKey] = useState('');
+
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+        if (e.key === "Escape" || e.key === "Enter") {
+        e.preventDefault();
+        onClose();
+        }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
+
+  useEffect(() => {
+    if (mediaType !== null && id !== null) {
+      async function getMediaDetails() {
+        const extrackMediaDetails = await getTvOrMovieDetailsById(mediaType, id);
+
+        const findIndexOfTrailer = extrackMediaDetails?.videos?.results?.findIndex(
+          (video) => video?.type === "Trailer"
+        );
+        console.log("findIndexOfTrailer", findIndexOfTrailer);
+        
+
+        // Only returns array of similar items (not an object with videos inside)
+        const similarResults = await getSimilerTvOrMovies(mediaType, id);
+
+        setMediaDetails(extrackMediaDetails);
+
+        const trailerKey =
+          findIndexOfTrailer !== -1
+            ? extrackMediaDetails?.videos?.results?.[findIndexOfTrailer]?.key
+            : "XuDwndGaCFo"; // fallback
+
+        setKey(trailerKey);
+
+        setSimilarMovies(
+          similarResults?.map((item) => ({
+            ...item,
+            mediaType: mediaType === "movie" ? "movie" : "tv",
+            addedToFavorites: false,
+          })) || [] 
+        );
+      }
+
+      getMediaDetails();
+    }
+  }, [loggedInAccount, mediaType, id]);
 
 
 
